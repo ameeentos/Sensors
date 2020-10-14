@@ -7,12 +7,13 @@
     tools:context=".MainFragment">
 
     <TextView
+        android:id="@+id/coordinatesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Main fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Coordinates"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
