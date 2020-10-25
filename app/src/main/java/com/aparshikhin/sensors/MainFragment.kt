@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.aparshikhin.sensors.helpers.Logger
+import com.aparshikhin.sensors.state.PhoneState
+import com.aparshikhin.sensors.state.State
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
@@ -25,10 +27,17 @@ class MainFragment : Fragment() {
             val y = sensorEvent.values[1]
             val z = sensorEvent.values[2]
 
+            // todo: remove?
             coordinatesTextView.text = getString(R.string.coordinates, x, y ,z)
 
-            if (x > 7 || x < -7) {
-                Logger.debug("onSensorChanged: X==$x")
+            if (y > 2 && x > 5.5 && x < 110) {
+                PhoneState.getPhoneState().notifyStateChange(State.TiltLeft)
+            } else if (y > 2 && x > -10 && x < -5.5) {
+                PhoneState.getPhoneState().notifyStateChange(State.TiltRight)
+            } else if (x > 8.8 || x < -8.8 || y < 2) {
+                PhoneState.getPhoneState().notifyStateChange(State.Downwards)
+            } else {
+                PhoneState.getPhoneState().notifyStateChange(State.Straight)
             }
         }
 
@@ -64,7 +73,7 @@ class MainFragment : Fragment() {
             mSensorManager =
                 requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
             mLinearAccelerationSensor =
-                mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
             Logger.debug("SensorManager was created")
         } catch (exception: Exception) {
             Logger.error(exception, "SensorManager didn't created")
