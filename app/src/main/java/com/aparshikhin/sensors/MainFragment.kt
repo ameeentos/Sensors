@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
             // todo: remove?
             coordinatesTextView.text = getString(R.string.coordinates, x, y ,z)
 
-            if (y > 2 && x > 5.5 && x < 110) {
+            if (y > 2 && x > 5.5 && x < 10) {
                 PhoneState.getPhoneState().notifyStateChange(State.TiltLeft)
             } else if (y > 2 && x > -10 && x < -5.5) {
                 PhoneState.getPhoneState().notifyStateChange(State.TiltRight)
