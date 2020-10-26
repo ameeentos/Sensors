@@ -34,7 +34,7 @@ class MainFragment : Fragment() {
                 PhoneState.getPhoneState().notifyStateChange(State.TiltLeft)
             } else if (y > 2 && x > -10 && x < -5.5) {
                 PhoneState.getPhoneState().notifyStateChange(State.TiltRight)
-            } else if (x > 8.8 || x < -8.8 || y < 2) {
+            } else if (x > 10 || x < -10 || y < 2) {
                 PhoneState.getPhoneState().notifyStateChange(State.Downwards)
             } else {
                 PhoneState.getPhoneState().notifyStateChange(State.Straight)
