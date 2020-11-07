@@ -1,9 +1,20 @@
 package com.aparshikhin.sensors.state;
 
 import com.aparshikhin.sensors.helpers.Logger;
+import com.aparshikhin.sensors.models.CommandDTO;
+import com.aparshikhin.sensors.retrofit2.Common;
+import com.aparshikhin.sensors.retrofit2.RetrofitServices;
+
+import java.util.Arrays;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PhoneState {
     private static PhoneState PhoneS = new PhoneState();
+    private RetrofitServices mService = Common.INSTANCE.getRetrofitService();
 
     public static PhoneState getPhoneState() {
         return PhoneS;
@@ -33,6 +44,18 @@ public class PhoneState {
         }
 
         if ((newS == State.TiltLeft || newS == State.TiltRight) && prevS == State.Straight) {
+            mService.sendCommand(new CommandDTO(newS.getCommand())).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Logger.Companion.info("onResponse");
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Logger.Companion.info("onFailure");
+                    Logger.Companion.info(Arrays.toString(t.getStackTrace()));
+                }
+            });
             Logger.Companion.info("COMMAND SEND:" + newS.getCommand());
         }
 

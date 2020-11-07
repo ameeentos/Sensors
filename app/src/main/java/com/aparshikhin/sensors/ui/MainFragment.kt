@@ -30,9 +30,6 @@ class MainFragment : Fragment() {
             val y = sensorEvent.values[1]
             val z = sensorEvent.values[2]
 
-            // todo: remove?
-            coordinatesTextView.text = getString(R.string.coordinates, x, y, z)
-
             if (y > 2 && x > 5.5 && x < 10) {
                 PhoneState.getPhoneState().notifyStateChange(State.TiltLeft)
             } else if (y > 2 && x > -10 && x < -5.5) {
@@ -41,18 +38,6 @@ class MainFragment : Fragment() {
                 PhoneState.getPhoneState().notifyStateChange(State.Downwards)
             } else {
                 PhoneState.getPhoneState().notifyStateChange(State.Straight)
-            /*if (x > 7 || x < -7) {
-                Logger.debug("onSensorChanged: X==$x")
-                mService.sendCommand(CommandDTO("right")).enqueue(object : Callback<ResponseBody> {
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        Logger.info("onFailure")
-                        Logger.info(t.stackTraceToString())
-                    }
-
-                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                        Logger.info("onResponse")
-                    }
-                })*/
             }
         }
 
