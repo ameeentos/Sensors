@@ -10,11 +10,11 @@ pipeline {
                 }
                 sh("chmod 775 /var/lib/jenkins/workspace/app_builder/gradlew")
             }
-        }
-        post {
-            always {
-                junit '**/target/*.xml'
-                archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', followSymlinks: false, onlyIfSuccessful: true
+            post {
+                always {
+                    junit '**/target/*.xml'
+                    archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', followSymlinks: false, onlyIfSuccessful: true
+                }
             }
         }
     }
