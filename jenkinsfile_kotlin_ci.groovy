@@ -12,7 +12,6 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/target/*.xml'
                     archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', followSymlinks: false, onlyIfSuccessful: true
                 }
             }
