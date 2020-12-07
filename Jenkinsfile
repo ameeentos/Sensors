@@ -5,7 +5,7 @@ pipeline {
       steps {
         sh 'chmod 775 /var/lib/jenkins/workspace/app_builder/gradlew'
         withGradle() {
-          build 'build'
+          build './gradlew build'
         }
 
       }
