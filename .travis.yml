@@ -20,4 +20,5 @@ before_install:
   - yes | sdkmanager "platforms;android-29"
 
 script:
+    - git update-index --chmod=+x gradlew
     - ./gradlew build
